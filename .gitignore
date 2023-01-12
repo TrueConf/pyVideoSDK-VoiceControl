@@ -1,0 +1,10 @@
+env/
+
+/models/vosk*
+
+.git/
+.vscode/
+.idea
+__pycache__
+*.lock
+*.log

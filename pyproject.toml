@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "room-api"
+version = "0.1.0"
+description = ""
+authors = ["TrueConf"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+requests = "2.28.1"
+sounddevice = "0.4.5"
+vosk = [
+    { version = "0.3.45", markers = "sys_platform == 'win32'"},
+    { version = "0.3.45", markers = "sys_platform == 'linux'"}
+]
+websocket-client = "1.4.2"
+Levenshtein = "0.20.8"
+pyttsx3 = {version = "2.90", markers = "sys_platform == 'win32'"}
+pyfestival = {version = "0.6", markers = "sys_platform == 'linux'"}
+soundfile = "0.11.0"
+numpy = "1.24.0"
+orjson = "3.8.3"
+
+[tool.poetry.dev-dependencies]
+autopep8 = "^1.7.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[virtualenvs]
+in-project = true
