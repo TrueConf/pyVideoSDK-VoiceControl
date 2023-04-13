@@ -1,5 +1,7 @@
 # Голосовое управление VideoSDK с помощью pyVideoSDK
 
+*Читать описание на других языках: [English](README.md)*
+
 В данном скрипте реализованы следующие возможности:
 
 1. Авторизация на сервере.
@@ -8,7 +10,17 @@
 
 1. Автоматический перенос раскладки презентации на второй монитор.
 
-*Читать описание на других языках: [English](README.md)*
+Подробное описание данных кейсов смотрите в статье на Хабр: [https://habr.com/ru/articles/710524/](https://habr.com/ru/articles/710524/)
+
+Документация по TrueConf VideoSDK API / TrueConf Room API: [https://docs.trueconf.com/videosdk/introduction/common](https://docs.trueconf.com/videosdk/introduction/common)
+
+**Другие проекты с VideoSDK:**
+
+* [pyVideoSDK](https://github.com/zoboff/pyVideoSDK), библиотека на Python для TrueConf VideoSDK API / TrueConf Room API
+* [CallButton](https://github.com/TrueConf/CallButton), пример плавающей кнопки для вызова абонента
+* [pyVideoSDK-Demo](https://github.com/TrueConf/pyVideoSDK-Demo), примеры использования библиотеки pyVideoSDK
+* [videosdk](https://github.com/TrueConf/videosdk), C++ библиотека для TrueConf VideoSDK API / TrueConf Room API
+* [DemoQtVideoSDK](https://github.com/TrueConf/DemoQtVideoSDK), пример использования на C++ (Qt) библиотеки videosdk
 
 ## Развертывание
 
