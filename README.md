@@ -7,7 +7,7 @@
   </a>
 </p>
 
-<h1 align="center">Voice control for TrueConf Room using <code>python-trueconf-room</code></h1>
+<h1 align="center">Voice control for TrueConf Room <br> using <code>python-trueconf-room</code></h1>
 
 <p align="center">
     <a href="https://pypi.org/project/python-trueconf-room/">
