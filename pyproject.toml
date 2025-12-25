@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "room-api"
+name = "trueconf-room-voice-control"
 version = "0.1.0"
 description = ""
-authors = ["TrueConf"]
+authors = ["TrueConf LLC"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -19,6 +19,7 @@ pyfestival = {version = "0.6", markers = "sys_platform == 'linux'"}
 soundfile = "0.11.0"
 numpy = "1.24.0"
 orjson = "3.8.3"
+python-trueconf-room = "1.0.0"
 
 [tool.poetry.dev-dependencies]
 autopep8 = "^1.7.0"
