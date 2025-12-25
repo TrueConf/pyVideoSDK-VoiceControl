@@ -1,4 +1,32 @@
-# Voice control of VideoSDK  with pyVideoSDK
+<p align="center">
+  <a href="https://trueconf.com" target="_blank" rel="noopener noreferrer">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/TrueConf/.github/refs/heads/main/logos/logo-dark.svg">
+      <img width="150" alt="trueconf" src="https://raw.githubusercontent.com/TrueConf/.github/refs/heads/main/logos/logo.svg">
+    </picture>
+  </a>
+</p>
+
+<h1 align="center">Voice control for TrueConf Room using <code>python-trueconf-room</code></h1>
+
+<p align="center">
+    <a href="https://pypi.org/project/python-trueconf-room/">
+        <img src="https://img.shields.io/pypi/v/python-trueconf-room">
+    </a>
+    <a href="https://t.me/trueconf_chat" target="_blank">
+        <img src="https://img.shields.io/badge/Telegram-2CA5E0?logo=telegram&logoColor=white" />
+    </a>
+    <a href="https://discord.gg/2gJ4VUqATZ">
+        <img src="https://img.shields.io/badge/Discord-%235865F2.svg?&logo=discord&logoColor=white" />
+    </a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/TrueConf/python-trueconf-room/blob/master/README.md">English</a> /
+  <a href="https://github.com/TrueConf/python-trueconf-room/blob/master/README-ru.md">Русский</a>
+</p>
+
+## 💬 Overview
 
 This script implements the following features:
 
@@ -6,13 +34,11 @@ This script implements the following features:
 1. Voice control.
 1. Automatic transfer of a slideshow window to the second screen.
 
-*Switch to other languages: [Russian](README_RU.md)*
+## 🔄 Deployment
 
-## Deployment
+### TrueConf Room installation
 
-### VideoSDK installation
-
-VideoSDK can be downloaded [here](https://github.com/TrueConf/pyVideoSDK/blob/main/download.md). VideoSDK installation does not differ from the installation of any typical program, e.g., Notepad++.
+TrueConf Room can be downloaded [here](https://github.com/TrueConf/python-trueconf-room/blob/master/download_links.md). TrueConf Room installation does not differ from the installation of any typical program, e.g., Notepad++.
 
 ### Installing dependencies
 
@@ -20,14 +46,15 @@ Installation of dependencies differs on Windows and Linux.
 
 #### Windows
 
-1. Install git and python3.
-1. Install Poetry with PowerShell
+1. Install `git` and `python3`.
+1. Install `Poetry` with `PowerShell`:
 
     ```powershell
     (Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | py -
     ```
 
-    >**NOTE**: If you have installed Python from the Microsoft Store, replace `py` with `python` in the command described above.
+> [!NOTE]
+> If you have installed Python from the Microsoft Store, replace `py` with `python` in the command described above.
 
 #### Linux
 
@@ -42,12 +69,12 @@ Installation of dependencies differs on Windows and Linux.
 
 1. Restart your computer after installation.
 
-### Cloning and initializing the project
+### ✨ Cloning and initializing the project
 
 1. Go to the folder where the project will be saved, open the terminal and run this command:
 
     ```bash
-    git clone --recurse-submodules https://github.com/TrueConf/pyVideoSDK-VoiceControl.git
+    git clone https://github.com/TrueConf/TrueConf-Room-Voice-Control.git
     ```
 
     This command will download the repository and automatically initialize and update every sub-module in the repository.
@@ -62,11 +89,11 @@ Installation of dependencies differs on Windows and Linux.
 
     Poetry will create a virtual environment in `{project-path}/.venv/` and install Python dependencies in it.
 
-## Settings configuration
+## ⚙️ Settings configuration
 
 The configuration file `config.py` includes the settings for connections, authorization and command phrases.
 
-## Connection settings
+### 🛜 Connection settings
 
 Edit the file following the example below:  
 
@@ -78,7 +105,7 @@ PIN: str = "123" # The PIN will be used when starting VideoSDK
 DEBUG = False # Write more debug information to the console and to the log-file
 ```
 
-### Authorization settings
+### 🔑 Authorization settings
 
 Edit the file following the example below:
 
@@ -103,39 +130,38 @@ If you are not storing models in the default folder, specify the new path in the
 os.environ["VOSK_MODEL_PATH"] = 'new-path-to-folder-with-models-vosk'
 ```
 
-### Language settings
+### 🌐 Language settings
 
 In the LANG constant, specify the language that you want to use:
 
 ```python
 # Language settings (in lower case)
-LANG = "ru" 
+LANG = "en" 
 ```
 
 >**NOTE:** If your language is not English, you will need to add new strings to NUMERIC and SAY constants.
 
-### Voice settings (available only for Windows)
+### 🎤 Voice settings (available only for Windows)
 
 You can also select the voice to be used in the script:
 
 ```python
 # For EN: DAVID (man), ZIRA (woman)
-# For RU: IRINA (woman) 
-VOICE_NAME = "IRINA"
+VOICE_NAME = "DAVID"
 ```
 
-### Command phrases
+### 📝 Command phrases
 
 You can use your own command phrases in the script. To do it, edit the `HOTWORDS` dictionary in the `config.py` folder. The dictionary has the following structure:
 
 ```python
 HOTWORDS = {
     'call': ('call',),
-    'hello': ('Hey room',)
+    'hello': ('Hey Room',)
 }
 ```
 
-#### Activation of voice commands
+#### 🔊 Activation of voice commands
 
 Replace the value in the  `hello` key  with your own value. For example, if you want the script to respond to the phrase `Hi, app`, you can write (without a comma):
 
@@ -149,7 +175,7 @@ In this way, you can set any activation phrase. To use multiple activation phras
 "hello": ('Hey room','Hi app')
 ```
 
-#### Calling a user
+#### 📞 Calling a user
 
 The call will start if the script recognizes any word from the `call` list. For example, if you want the script to respond to the word `call` or any other words that you select, just add them to the list separated by commas (words should be put in quotation marks):
 
@@ -157,20 +183,20 @@ The call will start if the script recognizes any word from the `call` list. For 
 'call': ('call', 'make call to')
 ```
 
-## Start
+## 🚀 Start
 
 1. Run VideoSDK with the [`--pin` parameter](https://docs.trueconf.com/videosdk/en/introduction/commandline#pin) that has the value specified in the configuration file.
 
     **Windows:**
 
     ```bash
-    "C:\Program Files\TrueConf\VideoSDK\VideoSDK.exe" --pin 123
+    "C:\Program Files\TrueConf\Room\TrueConfRoom.exe" --pin 123
     ```
 
     **Linux:**
 
     ```bash
-    trueconf-video-sdk --pin 123
+    trueconf-room --pin 123
     ```
 
 1. Run the `main.py` file with Poetry:
@@ -179,9 +205,9 @@ The call will start if the script recognizes any word from the `call` list. For 
     poetry run python main.py
     ```
 
-## Use cases
+## 🧩 Use cases
 
-The phrase `Hi room` activates voice control. Currently, it is possible to call a user with the `Call` command. However, you can [edit](#command-phrases) this list by adding your own phrases.
+The phrase `Hi Room` activates voice control. Currently, it is possible to call a user with the `Call` command. However, you can [edit](#command-phrases) this list by adding your own phrases.
 
 To activate voice recognition, say `Hi room`. You will hear a sound indicating that voice commands can now be given. Right after the sound signal, say `Call {display name}`. The display name may include text, digits and emojis. When the command is given, voice recognition is disabled until the phrase `Hi room` is spoken again.
 
@@ -191,8 +217,4 @@ To activate voice recognition, say `Hi room`. You will hear a sound indicating t
 * Paul Robinson 3 — `Call Paul Robinson three`
 * 123-456 — `Call one two three four five six` (recommended option) or `Call one hundred and twenty-three four hundred and fifty-six` (may lead to inaccurate recognition).
 
-If the display name includes emojis, you do not have to pronounce them separately.  
-
-## Data needed for authorization on the test server
-
-Go to the Telegram bot [@TrueConfSDKPromoBot](https://t.me/TrueConfSDKPromoBot) to get the server address, login, and password.
+If the display name includes emojis, you do not have to pronounce them separately.
