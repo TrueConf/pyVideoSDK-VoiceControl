@@ -22,8 +22,8 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/TrueConf/python-trueconf-room/blob/master/README.md">English</a> /
-  <a href="https://github.com/TrueConf/python-trueconf-room/blob/master/README-ru.md">Русский</a>
+  <a href="./README.md">English</a> /
+  <a href="./README-ru.md">Русский</a>
 </p>
 
 ## 💬 Overview
