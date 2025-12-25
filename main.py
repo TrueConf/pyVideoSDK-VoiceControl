@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-Voice control of VideoSDK  with pyVideoSDK
+Voice control for TrueConf Room using python-trueconf-room
 
 This script implements the following features:
 
@@ -21,11 +21,11 @@ import orjson
 import sounddevice as sd
 import vosk
 import Levenshtein
-# lib for VideoSDK API (pyVideoSDK)
-import pyVideoSDK
-import pyVideoSDK.consts as C
-from pyVideoSDK.methods import Methods
-from pyVideoSDK.consts import EVENT, METHOD_RESPONSE
+
+import trueconf_room
+import trueconf_room.consts as C
+from trueconf_room.methods import Methods
+from trueconf_room.consts import EVENT, METHOD_RESPONSE
 import config
 
 if os.name == 'posix':
@@ -46,13 +46,13 @@ device = sd.default.device
 samplerate = int(sd.query_devices(device, 'input')['default_samplerate'])
 # create sounds object
 sounds = config.Sounds()
-# create VideoSDK object
-sdk = pyVideoSDK.open_session(ip=config.IP,
+# create TrueConf Room object
+room = trueconf_room.open_session(ip=config.IP,
                               port=config.PORT,
                               pin=config.PIN,
                               debug=config.DEBUG)
 # create methods object
-methods = Methods(sdk)
+methods = Methods(room)
 
 # load vosk model based on LANG
 model = vosk.Model(lang=config.LANG)
@@ -80,7 +80,7 @@ def text_to_number(text_with_number: tuple):
 
 
 def contact_diff(response):
-    """Match inbox string with strings from VideoSDK address book (Abook parametr)"""
+    """Match inbox string with strings from TrueConf Room address book (Abook parametr)"""
     match_list = {}
     for display_name in Abook:
         concat_name = ''.join(display_name.split()).lower()
@@ -90,7 +90,7 @@ def contact_diff(response):
 
 
 def call(*args):
-    """Call contact from VideoSDK address book"""
+    """Call contact from TrueConf Room address book"""
     if args:
         name_to_call, percentage = contact_diff(*args)
         if percentage >= config.SIMILARITY_PERCENTAGE:
@@ -166,17 +166,17 @@ def main():
                             execute_command_with_name(command, command_options)
                         else:
                             sounds.error()
-                if not sdk.isConnected():
+                if not room.isConnected():
                     break
         except KeyboardInterrupt:
             print('Exit by Ctrl + c')
-        except pyVideoSDK.CustomSDKException as exception:
-            print(f'VideoSDK error: {exception}')
+        except trueconf_room.CustomSDKException as exception:
+            print(f'TrueConf Room error: {exception}')
 
 
-@sdk.handler(METHOD_RESPONSE[C.M_getAbook])
+@room.handler(METHOD_RESPONSE[C.M_getAbook])
 def on_getAbook(response):
-    """Get address book from VideoSDK"""
+    """Get address book from TrueConf Room"""
     print('on_getAbook')
     global Abook
     Abook = {}
@@ -187,7 +187,7 @@ def on_getAbook(response):
             continue
 
 
-@sdk.handler(METHOD_RESPONSE[C.M_getMonitorsInfo])
+@room.handler(METHOD_RESPONSE[C.M_getMonitorsInfo])
 def on_getMonitorInfo(response):
     """Found free monitor"""
     global IndexSlideshowMonitor
@@ -198,15 +198,15 @@ def on_getMonitorInfo(response):
         break
 
 
-@sdk.handler(EVENT[C.EV_contactsRenamed])
-@sdk.handler(EVENT[C.EV_contactsAdded])
-@sdk.handler(EVENT[C.EV_contactsDeleted])
+@room.handler(EVENT[C.EV_contactsRenamed])
+@room.handler(EVENT[C.EV_contactsAdded])
+@room.handler(EVENT[C.EV_contactsDeleted])
 def update_abook(response):
     """Func is updated address book in Abook paramater"""
     methods.getAbook()
 
 
-@sdk.handler(EVENT[C.EV_videoMatrixChanged])
+@room.handler(EVENT[C.EV_videoMatrixChanged])
 def on_moveVideoSlotToMonitor(response):
     """Func is moved video slot to other monitor (second, free monitor)"""
     methods.getMonitorsInfo()
@@ -217,7 +217,7 @@ def on_moveVideoSlotToMonitor(response):
             break
 
 
-@sdk.handler(EVENT[C.EV_login])
+@room.handler(EVENT[C.EV_login])
 def on_state_change(response):
     """Printed to console message about successfully authenticated to the server"""
     if response["result"] == 0:
@@ -225,7 +225,7 @@ def on_state_change(response):
         methods.getAbook()
 
 
-@sdk.handler(EVENT[C.EV_serverConnected])
+@room.handler(EVENT[C.EV_serverConnected])
 def on_serverConnected(response):
     """Need to login"""
     methods.login(config.TRUECONF_ID, config.PASSWORD)
